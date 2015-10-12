@@ -1,6 +1,6 @@
 <tool id="pathomap_s" name="Pathoscope map module(Single End)">
   <description>Pathoscope maps single end reads against target and filter library</description>
-  <command interpreter="bash">pathomap_s.sh $reads $target $filter $outAlign</command>
+  <command interpreter="python">pathomap_s.py -U $reads -targetRefFiles $target -filterRefFiles $filter -outAlign $outAlign</command>
   <inputs>
     <param name="reads" type="data" format="fastq" label="Sample reads"/>
     <param name="target" type="data" format="fasta" label="Target library"/>
