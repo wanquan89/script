@@ -1,0 +1,37 @@
+<tool id="pathomap_p" name="Pathoscope map module(Paired End)">
+  <description>Pathoscope maps paired end reads against target and filter library</description>
+  <command interpreter="bash">pathomap_p.sh $reads1 $reads2 $target $filter $outAlign</command>
+  <inputs>
+    <param name="reads1" type="data" format="fastq" label="Paired end sample reads 1"/>
+    <param name="reads2" type="data" format="fastq" label="Paired end sample reads 2"/>
+    <param name="target" type="data" format="fasta" label="Target library"/>
+    <param name="filter" type="data" format="fasta" label="Filter library"/>
+  </inputs>
+  <outputs>
+    <data format="sam" name="outAlign"/>
+  </outputs>
+  <stdio>
+    <regex match="done"
+           source="both"
+           level="log"
+           description="done" />
+    <regex match="saved"
+           source="both"
+           level="log"
+           description="taxdump.tar.gz" />
+  </stdio>
+  <tests>
+    <test>
+      <param name="reads1" value="sample1.fastq"/>
+      <param name="reads2" value="sample2.fastq"/>
+      <param name="target" value="virus.fasta"/>
+      <param name="filter" value="human.fasta"/>
+      <output name="outAlign" file="outAlign.sam"/>
+    </test>
+  </tests>
+
+  <help>
+This tool maps paired end reads against target library and filter library to a sam file.
+  </help>
+
+</tool>

@@ -1,0 +1,31 @@
+<tool id="pathoid" name="Pathoscope analyze module">
+  <description>Pathoscope analyze reads percentage</description>
+  <command interpreter="bash">pathoid.sh $reads $finalreport</command>
+  <inputs>
+    <param name="reads" type="data" format="sam" label="Aligned Sam file"/>
+  </inputs>
+  <outputs>
+    <data format="tsv" name="finalreport" label="Final_Report"/>
+  </outputs>
+  <stdio>
+    <regex match="done"
+           source="both"
+           level="log"
+           description="done" />
+    <regex match="saved"
+           source="both"
+           level="log"
+           description="taxdump.tar.gz" />
+  </stdio>
+  <tests>
+    <test>
+      <param name="reads" value="aligned.sam"/>
+      <output name="FinalReport" file="finalreport.tsv"/>
+    </test>
+  </tests>
+
+  <help>
+This tool analyze the reads percentage to a tsv file.
+  </help>
+
+</tool>

@@ -1,0 +1,33 @@
+<tool id="pathoscope_build_library" name="Pathoscope Build Library">
+  <description>Build target library for Pathoscope</description>
+  <command interpreter="bash">build_library.sh $tax_id $tag $target_library</command>
+  <inputs>
+    <param name="tax_id" size="20" type="integer" value="1111" label="Taxonomy ID"/>
+    <param name="tag" size="20" type="text" value="Taxonomy" label="Tag name"/>
+  </inputs>
+  <outputs>
+    <data format="fasta" name="target_library" label="${tax_id.value}_${tag.value}" />
+  </outputs>
+  <stdio>
+    <regex match="done"
+           source="both"
+           level="log"
+           description="done" />
+    <regex match="saved"
+           source="both"
+           level="log"
+           description="taxdump.tar.gz" />
+  </stdio>
+  <tests>
+    <test>
+      <param name="tax_id" value="10239"/>
+      <param name="tag" value="virus"/>
+      <output name="target_library"/>
+    </test>
+  </tests>
+
+  <help>
+This tool build pathoscope target library to a FASTA file.
+  </help>
+
+</tool>

@@ -1,0 +1,35 @@
+<tool id="pathomap_s" name="Pathoscope map module(Single End)">
+  <description>Pathoscope maps single end reads against target and filter library</description>
+  <command interpreter="bash">pathomap_s.sh $reads $target $filter $outAlign</command>
+  <inputs>
+    <param name="reads" type="data" format="fastq" label="Sample reads"/>
+    <param name="target" type="data" format="fasta" label="Target library"/>
+    <param name="filter" type="data" format="fasta" label="Filter library"/>
+  </inputs>
+  <outputs>
+    <data format="sam" name="outAlign" />
+  </outputs>
+  <stdio>
+    <regex match="done"
+           source="both"
+           level="log"
+           description="done" />
+    <regex match="saved"
+           source="both"
+           level="log"
+           description="taxdump.tar.gz" />
+  </stdio>
+  <tests>
+    <test>
+      <param name="reads" value="sample.fastq"/>
+      <param name="target" value="virus.fasta"/>
+      <param name="filter" value="human.fasta"/>
+      <output name="outAlign" file="outAlign.sam"/>
+    </test>
+  </tests>
+
+  <help>
+This tool maps single end reads against target library and filter library to a sam file.
+  </help>
+
+</tool>
